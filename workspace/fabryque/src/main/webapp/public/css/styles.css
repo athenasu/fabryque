@@ -1,0 +1,162 @@
+html {
+	user-select: none;
+}
+
+* {
+	outline: none !important;
+}
+
+body {
+	font-size: 13px;
+	overflow-x: hidden;
+	height: 100vh;
+	margin: 0;
+	font-family: "Montserrat", sans-serif;
+	display: flex;
+	flex-direction: column;
+}
+
+body div {
+	font-family: "Montserrat", sans-serif !important;
+}
+
+div {
+	padding: 0;
+}
+
+article {
+	margin: auto;
+	border: #708090 solid 1px;
+	height: 65%;
+	width: 80%;
+	text-align: center;
+	position: relative;
+	overflow: auto;
+	overflow-anchor: none;
+}
+
+/* ARTICLE SECTION SCROLL BAR */
+article::-webkit-scrollbar {
+	width: 12px;
+	height: 12px;
+}
+
+article::-webkit-scrollbar-thumb {
+	background: #708090;
+	border-radius: 0.2rem;
+	visibility: hidden;
+}
+
+article:hover::-webkit-scrollbar-thumb {
+	visibility: visible;
+}
+
+footer {
+	color: white;
+	color: rgba(0, 0, 0, 0.5);
+	text-align: center;
+	bottom: 2rem;
+	position: absolute;
+	width: 100%;
+}
+
+.wrapper {
+	width: 100vw;
+	height: 100vh;
+	text-align: center;
+	align-items: center;
+	display: flex;
+	position: relative;
+}
+
+.wrapper::before {
+	content: "";
+  background-image: url("../images/bg.jpg");
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center;
+	/* background: url("/images/bg.jpg") center center no-repeat scroll; */
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	width: 100%;
+	opacity: 0.07;
+	position: fixed;
+	min-height: 100%;
+	right: 0;
+	top: 0;
+}
+
+.logo {
+	height: 5rem;
+	width: 5rem;
+	position: fixed;
+	top: 1rem;
+	left: 1rem;
+}
+
+/* CUSTOMER TABLE */
+table {
+	margin: auto;
+	width: 80%;
+	border-collapse: collapse;
+	border-spacing: 1rem 0;
+}
+
+.cards th, .cards td {
+	text-align: center;
+}
+
+.cards th {
+	font-size: 1.3rem;
+	padding: 1rem 0 1rem 0;
+}
+
+.cards td {
+	font-size: 1rem;
+	padding: 0.6rem;
+}
+
+/* CUSTOMER ROW */
+#customer {
+	margin: 0 auto;
+	opacity: 0.7;
+	border-radius: 0.5rem;
+	border: #409fb0 1px solid;
+	transition-duration: 0.4s;
+	/* box-shadow: 5px 5px 15px rgba(122, 122, 122, 0.2); */
+}
+
+#customer>td {
+	margin-top: 1rem;
+}
+
+#customer:hover {
+	background-color: rgba(64, 159, 176, 0.2);
+}
+
+/* DELETE BUTTON & ALL CUSTOMER BUTTON */
+td button, #all-customers-btn button {
+	border: none;
+	padding: 0.3rem 1rem;
+	text-decoration: none;
+	display: inline-block;
+	transition-duration: 0.4s;
+	cursor: pointer;
+	border-radius: 0.5rem;
+	background-color: white;
+	color: black;
+	border: 2px solid #409fb0;
+}
+
+td button:hover, #all-customers-btn button:hover {
+	background-color: #409fb0;
+	color: white;
+}
+
+#all-customers-btn {
+	position: fixed;
+	top: 5rem;
+	left: 10rem;
+}

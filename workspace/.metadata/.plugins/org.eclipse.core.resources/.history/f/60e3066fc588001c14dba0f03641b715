@@ -1,0 +1,12 @@
+package customer.dao.impl;
+
+import java.util.List;
+
+import customer.entity.Customer;
+
+public interface CustomerDAO {
+	
+	public List<Customer> getAllCustomers();
+	public boolean delete(Customer customer);
+
+}

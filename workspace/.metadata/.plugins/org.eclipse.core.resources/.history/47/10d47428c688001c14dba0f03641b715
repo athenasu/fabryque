@@ -1,0 +1,12 @@
+package web.customer.service;
+
+import java.util.List;
+
+import customer.entity.Customer;
+
+public interface CustomerService {
+	
+	public List<Customer> getAllCustomers();
+	public boolean delete(Customer customer);
+
+}

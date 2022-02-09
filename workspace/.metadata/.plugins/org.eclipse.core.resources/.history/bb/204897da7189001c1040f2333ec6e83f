@@ -1,0 +1,115 @@
+"use strict";
+
+const allCustomersBtn = document.querySelector("#all-customers-btn");
+const customerContainer = document.querySelector("#customer-container");
+
+////////////////////////////////////////
+// FORMAT GENDER
+const formatGender = function (custGender) {
+    switch(custGender) {
+        case 0:
+            return "Female";
+        case 1:
+            return "Male";
+        case 2:
+            return "Undefined";
+        default:
+            return "Undefined";
+    }
+}
+
+// FORMAT CITY OF BIRTH
+const formatCityOfBirth = function (custCityOfBirth) {
+    switch(custCityOfBirth) {
+        case 0:
+            return "Taipei";
+        case 1:
+            return "Taoyuan";
+        case 2:
+            return "Hsintsu";
+        case 3:
+            return "Taichung";
+        case 4:
+            return "Changhwa";
+        case 5:
+            return "Tainan";
+        case 6:
+            return "Kaohsiung";
+        case 7:
+            return "Pingtung";
+        case 8:
+            return "Taitung";
+        default:
+            return "Other";
+    }
+}
+
+////////////////////////////////////////
+// RENDER ALL CUSTOMERS
+const renderCustomers = function(customer) {
+    // format gender
+    let gender = formatGender(customer.gender);
+    // format city of birth
+    let cityOfBirth = formatCityOfBirth(customer.cityOfBirth);
+    
+    let html = `
+        <tr id="customer" cust-id="${customer.id}">
+            <td class="customer-id">${customer.id}</td>
+            <td class="customer-name">${customer.name}</td>
+            <td class="customer-gender">${gender}</td>
+            <td class="customer-email">${customer.email}</td>
+            <td class="customer-city-of-birth">${cityOfBirth}</td>
+            <td class="temperature">cityTemp</td>
+            <td><button class="delete-button">Delete</button></td>
+        </tr>
+    `;
+    customerContainer.insertAdjacentHTML("beforeend",html);
+}
+
+
+allCustomersBtn && allCustomersBtn.addEventListener("click", function(){
+    customerContainer.innerHTML = "";
+    fetch("/fabryque/customer/getAllCustomers")
+    .then((body) => body.json())
+    .then((customers) => {
+      for (let customer of customers) {
+        // let cityOfBirth = formatCityOfBirth(customer.cityOfBirth);
+        // let cityTemp = renderCityTemperature(cityOfBirth)
+        // renderCustomers(customer, cityOfBirth, cityTemp);
+        renderCustomers(customer);
+      }
+    });
+})
+
+// DELETE CUSTOMER
+const deleteCustomer = function (customerId) {
+    fetch(`/fabryque/customer/delete`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            id: customerId,
+        }),
+    });
+};
+
+document.addEventListener("click", function(e) {
+    // console.log(e.target);
+    if (e.target.classList.contains("delete-button")) {
+        let parent = e.target.closest("#customer");
+        let customerId = parent.getAttribute("cust-id");
+        // console.log(customerId);
+        deleteCustomer(customerId);
+        parent.remove();
+    } else {
+        const apikey = "CWB-BE4C91F0-43E2-428F-B6A9-02C5AA943D76";
+        const format = "JSON";
+        const locationName = "台北市";
+        fetch(`https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=${apikey}&format=${format}&locationName=${locationName}`)
+        .then((body) => {
+            console.log(body);
+            body.json()}
+            );
+    }
+})

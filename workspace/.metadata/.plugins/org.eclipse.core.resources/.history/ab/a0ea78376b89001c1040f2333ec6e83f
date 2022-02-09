@@ -1,0 +1,103 @@
+"use strict";
+
+const allCustomersBtn = document.querySelector("#all-customers-btn");
+const customerContainer = document.querySelector("#customer-container");
+
+////////////////////////////////////////
+// FORMAT GENDER
+const formatGender = function (custGender) {
+    switch(custGender) {
+        case 0:
+            return "Female";
+        case 1:
+            return "Male";
+        case 2:
+            return "Undefined";
+        default:
+            return "Undefined";
+    }
+}
+
+// FORMAT CITY OF BIRTH
+const formatCityOfBirth = function (custCityOfBirth) {
+    switch(custCityOfBirth) {
+        case 0:
+            return "Taipei";
+        case 1:
+            return "Taoyuan";
+        case 2:
+            return "Hsintsu";
+        case 4:
+            return "Taichung";
+        case 5:
+            return "Changhwa";
+        case 6:
+            return "Tainan";
+        case 7:
+            return "Kaohsiung";
+        case 8:
+            return "Pingtung";
+        default:
+            return "Other";
+    }
+}
+
+////////////////////////////////////////
+// RENDER ALL CUSTOMERS
+const renderCustomers = function(customer) {
+    // format gender
+    let gender = formatGender(customer.gender);
+    // format city of birth
+    let cityOfBirth = formatCityOfBirth(customer.cityOfBirth);
+    
+    let html = `
+        <tr id="customer" cust-id="${customer.id}">
+            <td class="customer-id">${customer.id}</td>
+            <td class="customer-name">${customer.name}</td>
+            <td class="customer-gender">${gender}</td>
+            <td class="customer-email">${customer.email}</td>
+            <td class="customer-city-of-birth">${cityOfBirth}</td>
+            <td class="temperature">cityTemp</td>
+            <td><button>Delete</button></td>
+        </tr>
+    `;
+    customerContainer.insertAdjacentHTML("beforeend",html);
+}
+
+
+allCustomersBtn && allCustomersBtn.addEventListener("click", function(){
+    customerContainer.innerHTML = "";
+    fetch("/fabryque/customer/getAllCustomers")
+    .then((body) => body.json())
+    .then((customers) => {
+      for (let customer of customers) {
+        // let cityOfBirth = formatCityOfBirth(customer.cityOfBirth);
+        // let cityTemp = renderCityTemperature(cityOfBirth)
+        // renderCustomers(customer, cityOfBirth, cityTemp);
+        renderCustomers(customer);
+      }
+    });
+})
+
+// DELETE CUSTOMER
+const deleteCustomer = function (customerId) {
+    fetch(`fabryque/customer/delete`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            id: customerId,
+        }),
+    });
+};
+
+document.addEventListener("click", function(e) {
+    console.log(e.target);
+    if (e.target.classList.contains("delete-button")) {
+        let parent = e.target.closest("div#customer");
+        let customerId = parent.getAttribute("cust-id");
+        console.log(customerId);
+        // deleteCustomer(customerId);
+    }
+})

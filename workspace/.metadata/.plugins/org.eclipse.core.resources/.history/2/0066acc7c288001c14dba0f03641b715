@@ -1,0 +1,21 @@
+package customer.dao.impl;
+
+import java.util.List;
+
+import customer.entity.Customer;
+
+public class CustomerDAOImpl implements CustomerDAO {
+
+	@Override
+	public List<Customer> getAllCustomers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean delete(Customer customer) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

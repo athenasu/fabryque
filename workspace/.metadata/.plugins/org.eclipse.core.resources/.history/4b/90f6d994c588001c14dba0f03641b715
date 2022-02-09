@@ -1,0 +1,22 @@
+package customer.service.impl;
+
+import java.util.List;
+
+import customer.entity.Customer;
+import customer.service.CustomerService;
+
+public class CustomerServiceImpl implements CustomerService {
+
+	@Override
+	public List<Customer> getAllCustomers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean delete(Customer customer) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

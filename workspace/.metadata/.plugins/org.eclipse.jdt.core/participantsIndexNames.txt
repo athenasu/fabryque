@@ -1,0 +1,5 @@
+INDEX VERSION 1.131
+/Users/athenasu/Interviews/Fabryque/workspace/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/3363790364.index
+/fabryque/src/main/java
+/Users/athenasu/Interviews/Fabryque/workspace/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/2031682910.index
+/fabryque/src/main/java

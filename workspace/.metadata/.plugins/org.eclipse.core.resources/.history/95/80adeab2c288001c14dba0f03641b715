@@ -1,0 +1,5 @@
+package customer.dao.impl;
+
+public class CustomerDAO {
+
+}
